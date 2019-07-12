@@ -1,43 +1,52 @@
 <template>
-  <v-container grid-list-xl>
-    <v-layout text-xs-center wrap>
-      <v-flex v-for="card in cards" :key="card.title" xs3>
-        <v-card>
-          <v-img :src="card.src" height="200px">
-            <v-container fill-height fluid pa-2>
-              <v-layout fill-height>
-                <v-flex xs12 align-end flexbox>
-                  <span class="headline white--text" v-text="card.title"></span>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-img>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn icon>
-              <v-icon>favorite</v-icon>
-            </v-btn>
-            <v-btn icon>
-              <v-icon>bookmark</v-icon>
-            </v-btn>
-            <v-btn icon>
-              <v-icon>share</v-icon>
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <v-layout row wrap>
+    <!-- left -->
+    <v-flex d-flex xs1>
+      <v-card color="purple" dark>
+        <v-card-text>one</v-card-text>
+      </v-card>
+    </v-flex>
+    <!-- center -->
+    <v-flex d-flex xs10>
+      <v-layout row wrap>
+        <!-- title -->
+        <v-flex d-flex xs12>
+          <v-card color="indigo" dark>
+            <v-card-text>one</v-card-text>
+          </v-card>
+        </v-flex>
+        <v-flex d-flex xs12>
+          <v-layout row wrap>
+            <!-- outline -->
+            <v-flex d-flex xs2>
+              <v-card color="indigo" dark>
+                <v-card-text>one</v-card-text>
+              </v-card>
+            </v-flex>
+            <!-- content -->
+            <v-flex d-flex xs10>
+              <v-card color="indigo" dark>
+                <v-card-text>one</v-card-text>
+              </v-card>
+            </v-flex>
+          </v-layout>
+        </v-flex>
+      </v-layout>
+    </v-flex>
+    <!-- right -->
+    <v-flex d-flex xs1>
+      <v-card color="blue lighten-2" dark>
+        <v-card-text>one</v-card-text>
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
 export default {
   name: 'CreateItemFlow',
   data: () => ({
-    cards: [
-      { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12 }
-    ]
+
   })
 }
 </script>
