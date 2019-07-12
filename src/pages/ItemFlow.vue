@@ -11,6 +11,7 @@
         <v-btn outline color="info" class="text-none">Flow</v-btn>
         <v-btn outline color="info" class="text-none">Tag</v-btn>
         <v-btn outline color="error" class="text-none">Delete</v-btn>
+        <v-btn outline color="info" class="text-none">+Favorite</v-btn>
       </div>
     </v-flex>
     <!-- center -->
