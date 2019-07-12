@@ -1,29 +1,39 @@
 <template>
   <v-container grid-list-xl>
+    <v-toolbar flat dense fixed v-show="showToolbarAction">
+      <v-btn outline fab small flat @click.prevent="showToolbarAction = false">
+        <v-icon dark>clear</v-icon>
+      </v-btn>
+    </v-toolbar>
     <v-layout wrap>
       <v-flex v-for="card in cards" :key="card.title" xs3>
-        <v-card :to="card.title">
-          <v-card-title primary-title>
-            <div style="height: 100px; width: 100%">
-              <div class="headline one-line-overflow-hidden">{{ card.title }}</div>
-              <v-divider class="mt-1 mb-3"></v-divider>
-              <div class="multi-line-overflow-hidden">{{ card.outline }}</div>
-            </div>
-          </v-card-title>
+        <v-badge left overlap>
+          <template v-slot:badge>
+            <v-icon dark small @click.prevent="showToolbarAction = true">done</v-icon>
+          </template>
+          <v-card :to="card.title" width="275px">
+            <v-card-title primary-title>
+              <div style="height: 100px; width: 100%">
+                <div class="headline one-line-overflow-hidden">{{ card.title }}</div>
+                <v-divider class="mt-1 mb-3"></v-divider>
+                <div class="multi-line-overflow-hidden">{{ card.outline }}</div>
+              </div>
+            </v-card-title>
 
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn icon @click.prevent="card.favorite = !card.favorite">
-              <v-icon :color="card.favorite ? 'yellow darken-2' : ''">favorite</v-icon>
-            </v-btn>
-            <v-btn icon>
-              <v-icon>bookmark</v-icon>
-            </v-btn>
-            <v-btn icon>
-              <v-icon>share</v-icon>
-            </v-btn>
-          </v-card-actions>
-        </v-card>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn icon @click.prevent="card.favorite = !card.favorite">
+                <v-icon :color="card.favorite ? 'primary' : ''">favorite</v-icon>
+              </v-btn>
+              <v-btn icon>
+                <v-icon>bookmark</v-icon>
+              </v-btn>
+              <v-btn icon>
+                <v-icon>share</v-icon>
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-badge>
       </v-flex>
     </v-layout>
   </v-container>
@@ -47,7 +57,8 @@ export default {
       { title: 'DELETE Favorite road trips', outline: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', favorite: false, deleteAt: Date.now() },
       { title: 'DELETE Best airlines', outline: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', favorite: true, deleteAt: Date.now() }
     ],
-    cards: []
+    cards: [],
+    showToolbarAction: true
   }),
   created () {
     this.showCards()
