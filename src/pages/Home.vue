@@ -2,7 +2,7 @@
   <v-container grid-list-xl>
     <v-layout wrap>
       <v-flex v-for="card in cards" :key="card.title" xs3>
-        <v-card to="{ card.title }">
+        <v-card :to="card.title">
           <v-card-title primary-title>
             <div style="height: 100px; width: 100%">
               <div class="headline one-line-overflow-hidden">{{ card.title }}</div>
