@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-xl>
-    <v-toolbar flat dense fixed v-show="showToolbarAction">
-      <v-btn outline fab small flat @click.prevent="showToolbarAction = false">
+    <v-toolbar flat dense fixed v-show="showActionToolbar">
+      <v-btn outline fab small flat @click.prevent="showActionToolbar = false">
         <v-icon dark>clear</v-icon>
       </v-btn>
     </v-toolbar>
@@ -9,7 +9,7 @@
       <v-flex v-for="card in cards" :key="card.title" xs3>
         <v-badge left overlap>
           <template v-slot:badge>
-            <v-icon dark small @click.prevent="showToolbarAction = true">done</v-icon>
+            <v-icon dark small @click.prevent="showActionToolbar = true">done</v-icon>
           </template>
           <v-card :to="card.title" width="275px">
             <v-card-title primary-title>
@@ -58,7 +58,7 @@ export default {
       { title: 'DELETE Best airlines', outline: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', favorite: true, deleteAt: Date.now() }
     ],
     cards: [],
-    showToolbarAction: true
+    showActionToolbar: true
   }),
   created () {
     this.showCards()
