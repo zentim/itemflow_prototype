@@ -4,7 +4,7 @@
     <v-flex d-flex xs1>
       <!-- sidebar -->
       <div style="text-align:center">
-        <v-btn outline color="info" class="text-none">
+        <v-btn outline color="info" class="text-none mt-0">
           <v-icon dark>view_headline</v-icon>
         </v-btn>
         <v-btn outline color="info" class="text-none">Item</v-btn>
@@ -37,7 +37,7 @@
     <!-- right -->
     <v-flex d-flex xs1>
       <div style="text-align:center">
-        <v-btn outline color="info" class="text-none">
+        <v-btn outline color="info" class="text-none mt-0">
           <v-icon dark>search</v-icon>
         </v-btn>
       </div>
