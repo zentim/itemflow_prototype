@@ -1,37 +1,56 @@
 <template>
   <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
+    <v-toolbar>
+      <v-toolbar-title>itemflow</v-toolbar-title>
+
       <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
+
+      <v-text-field
+        v-model="searchInput"
+        solo
+        label="Search..."
+        clearable
+        prepend-inner-icon="search"
+      ></v-text-field>
+
+      <v-spacer></v-spacer>
+
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn flat>
+          <v-icon dark>add</v-icon>New Card
+        </v-btn>
+        <v-btn flat>
+          <v-icon dark>view_carousel</v-icon>All Cards
+        </v-btn>
+        <v-btn flat>
+          <v-icon dark>star</v-icon>Favorite
+        </v-btn>
+        <v-btn flat>
+          <v-icon dark>delete</v-icon>Trash
+        </v-btn>
+        <v-btn flat>
+          <v-icon dark>account_box</v-icon>Account
+        </v-btn>
+      </v-toolbar-items>
     </v-toolbar>
 
     <v-content>
-      <HelloWorld/>
+      <Home />
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import Home from './components/Home'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Home
   },
   data () {
     return {
-      //
+      searchInput: ''
     }
   }
 }
