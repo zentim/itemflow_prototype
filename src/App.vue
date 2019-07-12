@@ -26,16 +26,16 @@
         <v-btn flat to="new">
           <v-icon dark>add</v-icon>New Card
         </v-btn>
-        <v-btn flat>
+        <v-btn flat to="/">
           <v-icon dark>view_carousel</v-icon>All Cards
         </v-btn>
-        <v-btn flat>
-          <v-icon dark>star</v-icon>Favorite
+        <v-btn flat to="favorite">
+          <v-icon dark>favorite</v-icon>Favorite
         </v-btn>
-        <v-btn flat>
+        <v-btn flat to="trash">
           <v-icon dark>delete</v-icon>Trash
         </v-btn>
-        <v-btn flat>
+        <v-btn flat to="account">
           <v-icon dark>account_box</v-icon>Account
         </v-btn>
       </v-toolbar-items>

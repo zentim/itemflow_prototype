@@ -15,21 +15,21 @@ export default new VueRouter({
       name: 'New',
       component: require('@/pages/CreateItemFlow').default
     },
-    // {
-    //   path: '/favorite',
-    //   name: 'Favorite',
-    //   component: require('@/pages/Home').default
-    // },
-    // {
-    //   path: '/profile',
-    //   name: 'Profile',
-    //   component: require('@/pages/Profile').default
-    // },
-    // {
-    //   path: '/trash',
-    //   name: 'Trash',
-    //   component: require('@/pages/Home').default
-    // },
+    {
+      path: '/favorite',
+      name: 'Favorite',
+      component: require('@/pages/Home').default
+    },
+    {
+      path: '/account',
+      name: 'Account',
+      component: require('@/pages/Account').default
+    },
+    {
+      path: '/trash',
+      name: 'Trash',
+      component: require('@/pages/Home').default
+    },
     // {
     //   path: '/:id',
     //   name: 'Itemflow',
