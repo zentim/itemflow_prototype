@@ -29,15 +29,20 @@
                 auto-grow
                 outline
                 color="deep-purple"
-                label="Outline"
+                label="Outline..."
                 hide-details
               ></v-textarea>
             </v-flex>
             <!-- content -->
             <v-flex d-flex xs10>
-              <v-card color="indigo" dark>
-                <v-card-text>one</v-card-text>
-              </v-card>
+              <v-textarea
+                v-model="content"
+                auto-grow
+                outline
+                color="deep-purple"
+                label="Content..."
+                hide-details
+              ></v-textarea>
             </v-flex>
           </v-layout>
         </v-flex>
