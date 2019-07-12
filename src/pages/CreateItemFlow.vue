@@ -14,13 +14,11 @@
       </div>
     </v-flex>
     <!-- center -->
-    <v-flex d-flex xs10>
+    <v-flex xs10>
       <v-layout row wrap>
         <!-- title -->
         <v-flex d-flex xs12>
-          <v-card color="indigo" dark>
-            <v-card-text>one</v-card-text>
-          </v-card>
+          <v-text-field label="Title" solo outline flat hide-details></v-text-field>
         </v-flex>
         <v-flex d-flex xs12>
           <v-layout row wrap>
