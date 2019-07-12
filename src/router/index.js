@@ -13,7 +13,7 @@ export default new VueRouter({
     {
       path: '/new',
       name: 'New',
-      component: require('@/pages/CreateItemFlow').default
+      component: require('@/pages/ItemFlow').default
     },
     {
       path: '/favorite',

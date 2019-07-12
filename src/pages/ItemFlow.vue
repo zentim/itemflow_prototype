@@ -61,7 +61,7 @@
 
 <script>
 export default {
-  name: 'CreateItemFlow',
+  name: 'ItemFlow',
   data: () => ({
     title: '',
     outline: '',
