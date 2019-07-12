@@ -7,9 +7,9 @@
         <v-btn outline color="info" class="text-none mt-0">
           <v-icon dark>view_headline</v-icon>
         </v-btn>
-        <v-btn outline color="info" class="text-none">Item</v-btn>
-        <v-btn outline color="info" class="text-none">Flow</v-btn>
-        <v-btn outline color="info" class="text-none">Tag</v-btn>
+        <v-btn outline color="info" class="text-none" @click="type='item'">Item</v-btn>
+        <v-btn outline color="info" class="text-none" @click="type='flow'">Flow</v-btn>
+        <v-btn outline color="info" class="text-none" @click="type='tag'">Tag</v-btn>
         <v-btn outline color="error" class="text-none">Delete</v-btn>
         <v-btn outline color="info" class="text-none">+Favorite</v-btn>
       </div>
@@ -65,6 +65,77 @@
               </v-list>
             </v-flex>
           </v-layout>
+          <!-- type: tag -->
+          <v-layout row wrap v-show="type === 'tag'">
+            <!-- tag_from -->
+            <v-flex d-flex xs6>
+              <v-card>
+                <template>
+                  <v-toolbar flat dark>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-title>From</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                  </v-toolbar>
+                  <v-combobox
+                    v-model="chips_from"
+                    :items="chipsItems_from"
+                    label="From"
+                    chips
+                    clearable
+                    solo
+                    multiple
+                    flat
+                  >
+                    <template v-slot:selection="data">
+                      <v-chip
+                        :selected="data.selected"
+                        close
+                        @input="remove_chips_from(data.item)"
+                        color="primary"
+                        outline
+                      >
+                        <strong>{{ data.item }}</strong>&nbsp;
+                      </v-chip>
+                    </template>
+                  </v-combobox>
+                </template>
+              </v-card>
+            </v-flex>
+            <!-- tag_to -->
+            <v-flex d-flex xs6>
+              <v-card>
+                <template>
+                  <v-toolbar flat dark>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-title>To</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                  </v-toolbar>
+                  <v-combobox
+                    v-model="chips_to"
+                    :items="chipsItems_to"
+                    label="To"
+                    chips
+                    clearable
+                    solo
+                    multiple
+                    flat
+                  >
+                    <template v-slot:selection="data">
+                      <v-chip
+                        :selected="data.selected"
+                        close
+                        @input="remove_chips_to(data.item)"
+                        color="primary"
+                        outline
+                      >
+                        <strong>{{ data.item }}</strong>&nbsp;
+                      </v-chip>
+                    </template>
+                  </v-combobox>
+                </template>
+              </v-card>
+            </v-flex>
+          </v-layout>
         </v-flex>
       </v-layout>
     </v-flex>
@@ -87,10 +158,12 @@ export default {
     'tinymce-editor': Editor
   },
   data: () => ({
-    type: 'flow',
+    type: 'item',
     title: '',
+    // item
     outline: '',
     content: '',
+    // flow
     selected: [2],
     items: [
       {
@@ -123,8 +196,34 @@ export default {
         title: 'Britta Holt',
         subtitle: 'We should eat this: Grate, Squash, Corn, and tomatillo Tacos.'
       }
-    ]
-  })
+    ],
+    // tag
+    chips_from: ['Programming', 'Playing video games', 'Watching movies', 'Sleeping'],
+    chipsItems_from: ['Streaming', 'Eating'],
+    chips_to: ['Programming', 'Playing video games', 'Watching movies', 'Sleeping'],
+    chipsItems_to: ['Streaming', 'Eating']
+  }),
+  methods: {
+    // flow
+    toggle (index) {
+      const i = this.selected.indexOf(index)
+
+      if (i > -1) {
+        this.selected.splice(i, 1)
+      } else {
+        this.selected.push(index)
+      }
+    },
+    // tag
+    remove_chips_from (item) {
+      this.chips_from.splice(this.chips_from.indexOf(item), 1)
+      this.chips_from = [...this.chips_from]
+    },
+    remove_chips_to (item) {
+      this.chips_to.splice(this.chips_to.indexOf(item), 1)
+      this.chips_to = [...this.chips_to]
+    }
+  }
 }
 </script>
 
