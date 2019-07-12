@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-toolbar flat>
+    <v-toolbar flat dense>
       <v-toolbar-title>
         <router-link
           to="/"
