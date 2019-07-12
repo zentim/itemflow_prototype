@@ -24,11 +24,25 @@
           <v-layout row wrap>
             <!-- outline -->
             <v-flex d-flex xs2>
-              <v-textarea v-model="outline" auto-grow outline label="Outline..." hide-details></v-textarea>
+              <v-textarea
+                v-model="outline"
+                auto-grow
+                outline
+                label="Outline..."
+                hide-details
+                rows="25"
+              ></v-textarea>
             </v-flex>
             <!-- content -->
             <v-flex d-flex xs10>
-              <v-textarea v-model="content" auto-grow outline label="Content..." hide-details></v-textarea>
+              <v-textarea
+                v-model="content"
+                auto-grow
+                outline
+                label="Content..."
+                hide-details
+                rows="25"
+              ></v-textarea>
             </v-flex>
           </v-layout>
         </v-flex>
