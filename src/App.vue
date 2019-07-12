@@ -12,7 +12,10 @@
 
       <v-spacer></v-spacer>
 
-      <div style="width: 600px; border: 1px solid #e8e8e8">
+      <div
+        style="width: 600px; border: 1px solid #e8e8e8"
+        v-show="$route.name === 'Home' || $route.name === 'Favorite' || $route.name === 'Trash'"
+      >
         <v-text-field
           v-model="searchInput"
           solo
