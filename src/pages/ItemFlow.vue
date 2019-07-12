@@ -36,7 +36,7 @@
             </v-flex>
             <!-- content -->
             <v-flex d-flex xs10>
-              <tinymce-editor :init="{plugins: 'wordcount'}"></tinymce-editor>
+              <tinymce-editor :init="{plugins: 'wordcount', height: '100%'}"></tinymce-editor>
             </v-flex>
           </v-layout>
         </v-flex>
