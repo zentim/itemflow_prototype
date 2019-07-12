@@ -2,9 +2,16 @@
   <v-layout row wrap>
     <!-- left -->
     <v-flex d-flex xs1>
-      <v-card color="purple" dark>
-        <v-card-text>one</v-card-text>
-      </v-card>
+      <!-- sidebar -->
+      <div>
+        <v-btn outline color="info" class="text-none">
+          <v-icon dark>view_headline</v-icon>
+        </v-btn>
+        <v-btn outline color="info" class="text-none">Item</v-btn>
+        <v-btn outline color="info" class="text-none">Flow</v-btn>
+        <v-btn outline color="info" class="text-none">Tag</v-btn>
+        <v-btn outline color="error" class="text-none">Delete</v-btn>
+      </div>
     </v-flex>
     <!-- center -->
     <v-flex d-flex xs10>
