@@ -4,10 +4,11 @@
     <v-slide-y-transition>
       <v-toolbar flat dense fixed v-show="showActionToolbar">
         <v-toolbar-title>
-          <v-btn outline fab small flat @click.prevent="showActionToolbar = false">
+          <v-btn outline fab small flat @click.prevent="clearSelected">
             <v-icon dark>clear</v-icon>
           </v-btn>
         </v-toolbar-title>
+        <h2>{{ selectedList.length }}</h2>
 
         <v-spacer></v-spacer>
 
@@ -28,12 +29,7 @@
       >
         <v-badge left overlap v-model="card.cardHover">
           <template v-slot:badge>
-            <v-icon
-              dark
-              small
-              @click.prevent="showActionToolbar = true"
-              v-show="card.cardHover"
-            >done</v-icon>
+            <v-icon dark small @click.prevent="addToSelectedList(card)" v-show="card.cardHover">done</v-icon>
           </template>
           <v-card :to="card.title" width="275px">
             <v-card-title primary-title>
@@ -87,7 +83,7 @@ export default {
     ],
     cards: [],
     showActionToolbar: false,
-    cardHover: false
+    selectedList: []
   }),
   created () {
     this.showCards()
@@ -108,9 +104,27 @@ export default {
       if (this.$route.name === 'Trash') {
         this.cards = this.source.filter(card => !!card.deleteAt)
       }
+    },
+    addToSelectedList (card) {
+      this.showActionToolbar = true
+
+      let foundIndex = this.selectedList.findIndex(element => {
+        return element === card.id
+      })
+
+      if (foundIndex > -1) {
+        this.selectedList = this.selectedList.filter(element => {
+          return element !== card.id
+        })
+      } else {
+        this.selectedList.push(card.id)
+      }
+    },
+    clearSelected () {
+      this.showActionToolbar = false
+      this.selectedList = []
     }
   }
-
 }
 </script>
 
