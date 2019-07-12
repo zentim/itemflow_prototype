@@ -3,7 +3,7 @@
     <!-- left -->
     <v-flex d-flex xs1>
       <!-- sidebar -->
-      <div>
+      <div style="text-align:center">
         <v-btn outline color="info" class="text-none">
           <v-icon dark>view_headline</v-icon>
         </v-btn>
@@ -36,9 +36,11 @@
     </v-flex>
     <!-- right -->
     <v-flex d-flex xs1>
-      <v-card color="blue lighten-2" dark>
-        <v-card-text>one</v-card-text>
-      </v-card>
+      <div style="text-align:center">
+        <v-btn outline color="info" class="text-none">
+          <v-icon dark>search</v-icon>
+        </v-btn>
+      </div>
     </v-flex>
   </v-layout>
 </template>
