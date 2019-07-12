@@ -30,12 +30,12 @@ export default new VueRouter({
       name: 'Trash',
       component: require('@/pages/Home').default
     },
-    // {
-    //   path: '/:id',
-    //   name: 'Itemflow',
-    //   props: true,
-    //   component: require('@/pages/ItemFlow').default
-    // },
+    {
+      path: '/:id',
+      name: 'Itemflow',
+      props: true,
+      component: require('@/pages/ItemFlow').default
+    },
     {
       path: '*',
       redirect: '/'
