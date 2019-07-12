@@ -12,13 +12,16 @@
 
       <v-spacer></v-spacer>
 
-      <v-text-field
-        v-model="searchInput"
-        solo
-        label="Search..."
-        clearable
-        prepend-inner-icon="search"
-      ></v-text-field>
+      <div style="width: 600px; border: 1px solid #e8e8e8">
+        <v-text-field
+          v-model="searchInput"
+          solo
+          label="Search..."
+          clearable
+          prepend-inner-icon="search"
+          flat
+        ></v-text-field>
+      </div>
 
       <v-spacer></v-spacer>
 
@@ -57,3 +60,8 @@ export default {
   }
 }
 </script>
+<style>
+.v-input__slot {
+  margin-bottom: 0;
+}
+</style>
