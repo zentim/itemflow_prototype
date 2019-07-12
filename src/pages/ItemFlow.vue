@@ -36,14 +36,7 @@
             </v-flex>
             <!-- content -->
             <v-flex d-flex xs10>
-              <v-textarea
-                v-model="content"
-                auto-grow
-                outline
-                label="Content..."
-                hide-details
-                rows="25"
-              ></v-textarea>
+              <tinymce-editor :init="{plugins: 'wordcount'}"></tinymce-editor>
             </v-flex>
           </v-layout>
         </v-flex>
@@ -61,8 +54,12 @@
 </template>
 
 <script>
+import Editor from '@tinymce/tinymce-vue'
 export default {
   name: 'ItemFlow',
+  components: {
+    'tinymce-editor': Editor
+  },
   data: () => ({
     title: '',
     outline: '',
@@ -72,4 +69,7 @@ export default {
 </script>
 
 <style>
+.tox .tox-notification--in {
+  display: none !important;
+}
 </style>
