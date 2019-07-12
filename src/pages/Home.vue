@@ -3,9 +3,18 @@
     <!-- action toolbar -->
     <v-slide-y-transition>
       <v-toolbar flat dense fixed v-show="showActionToolbar">
-        <v-btn outline fab small flat @click.prevent="showActionToolbar = false">
-          <v-icon dark>clear</v-icon>
-        </v-btn>
+        <v-toolbar-title>
+          <v-btn outline fab small flat @click.prevent="showActionToolbar = false">
+            <v-icon dark>clear</v-icon>
+          </v-btn>
+        </v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+        <v-toolbar-items>
+          <v-btn outline color="info" class="text-none">Export</v-btn>
+          <v-btn outline color="error" class="text-none">Delete</v-btn>
+        </v-toolbar-items>
       </v-toolbar>
     </v-slide-y-transition>
     <!-- cards -->
