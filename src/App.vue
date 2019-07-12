@@ -1,7 +1,14 @@
 <template>
   <v-app>
     <v-toolbar>
-      <v-toolbar-title>itemflow</v-toolbar-title>
+      <v-toolbar-title>
+        <router-link
+          to="/"
+          tag="span"
+          style="cursor: pointer"
+          class="display-1 font-weight-bold text-none"
+        >ItemFlow</router-link>
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -16,7 +23,7 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat>
+        <v-btn flat to="new">
           <v-icon dark>add</v-icon>New Card
         </v-btn>
         <v-btn flat>
@@ -35,19 +42,14 @@
     </v-toolbar>
 
     <v-content>
-      <Home />
+      <router-view></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import Home from './components/Home'
-
 export default {
   name: 'App',
-  components: {
-    Home
-  },
   data () {
     return {
       searchInput: ''
