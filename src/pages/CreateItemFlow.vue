@@ -18,15 +18,20 @@
       <v-layout row wrap>
         <!-- title -->
         <v-flex d-flex xs12>
-          <v-text-field label="Title" solo outline flat hide-details></v-text-field>
+          <v-text-field label="Title..." solo outline flat hide-details></v-text-field>
         </v-flex>
         <v-flex d-flex xs12>
           <v-layout row wrap>
             <!-- outline -->
             <v-flex d-flex xs2>
-              <v-card color="indigo" dark>
-                <v-card-text>one</v-card-text>
-              </v-card>
+              <v-textarea
+                v-model="outline"
+                auto-grow
+                outline
+                color="deep-purple"
+                label="Outline"
+                hide-details
+              ></v-textarea>
             </v-flex>
             <!-- content -->
             <v-flex d-flex xs10>
@@ -51,7 +56,9 @@
 export default {
   name: 'CreateItemFlow',
   data: () => ({
-
+    title: '',
+    outline: '',
+    content: ''
   })
 }
 </script>
