@@ -21,15 +21,20 @@
     <!-- cards -->
     <v-layout wrap>
       <v-flex
-        v-for="card in cards"
+        v-for="(card, index) in cards"
         :key="card.id"
         @mouseover="card.cardHover = true"
         @mouseleave="card.cardHover = false"
         xs3
       >
-        <v-badge left overlap v-model="card.cardHover">
+        <v-badge left overlap :value="card.cardHover || card.isSelected">
           <template v-slot:badge>
-            <v-icon dark small @click.prevent="addToSelectedList(card)" v-show="card.cardHover">done</v-icon>
+            <v-icon
+              dark
+              small
+              @click.prevent="addToSelectedList(card, index)"
+              v-show="card.cardHover || card.isSelected"
+            >done</v-icon>
           </template>
           <v-card :to="card.title" width="275px">
             <v-card-title primary-title>
@@ -68,18 +73,18 @@ export default {
   name: 'Home',
   data: () => ({
     source: [
-      { id: 1, title: 'Pre-fab homes Pre-fab homes Pre-fab homes', outline: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit distinctio, eos, labore inventore molestias recusandae quae velit quod ea est nulla! Et minima quae quo dolor quos perferendis, accusantium voluptatum.', favorite: true, cardHover: false },
-      { id: 2, title: 'Favorite road trips', outline: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', favorite: false, cardHover: false },
-      { id: 3, title: 'Best airlines', outline: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', favorite: false, cardHover: false },
-      { id: 4, title: 'Pre-fab homes', outline: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', favorite: false, cardHover: false },
-      { id: 5, title: 'Favorite road trips', outline: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', favorite: false, cardHover: false },
-      { id: 6, title: 'DELETE Best airlines', outline: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', favorite: false, deleteAt: Date.now(), cardHover: false },
-      { id: 7, title: 'DELETE Pre-fab homes', outline: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', favorite: false, deleteAt: Date.now(), cardHover: false },
-      { id: 8, title: 'DELETE Favorite road trips', outline: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', favorite: false, deleteAt: Date.now(), cardHover: false },
-      { id: 9, title: 'DELETE Best airlines', outline: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', favorite: false, deleteAt: Date.now(), cardHover: false },
-      { id: 10, title: 'DELETE Pre-fab homes', outline: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', favorite: false, deleteAt: Date.now(), cardHover: false },
-      { id: 11, title: 'DELETE Favorite road trips', outline: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', favorite: false, deleteAt: Date.now(), cardHover: false },
-      { id: 12, title: 'DELETE Best airlines', outline: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', favorite: true, deleteAt: Date.now(), cardHover: false }
+      { id: 1, title: 'Pre-fab homes Pre-fab homes Pre-fab homes', outline: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit distinctio, eos, labore inventore molestias recusandae quae velit quod ea est nulla! Et minima quae quo dolor quos perferendis, accusantium voluptatum.', favorite: true, cardHover: false, isSelected: false },
+      { id: 2, title: 'Favorite road trips', outline: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', favorite: false, cardHover: false, isSelected: false },
+      { id: 3, title: 'Best airlines', outline: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', favorite: false, cardHover: false, isSelected: false },
+      { id: 4, title: 'Pre-fab homes', outline: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', favorite: false, cardHover: false, isSelected: false },
+      { id: 5, title: 'Favorite road trips', outline: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', favorite: false, cardHover: false, isSelected: false },
+      { id: 6, title: 'DELETE Best airlines', outline: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
+      { id: 7, title: 'DELETE Pre-fab homes', outline: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
+      { id: 8, title: 'DELETE Favorite road trips', outline: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
+      { id: 9, title: 'DELETE Best airlines', outline: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
+      { id: 10, title: 'DELETE Pre-fab homes', outline: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
+      { id: 11, title: 'DELETE Favorite road trips', outline: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
+      { id: 12, title: 'DELETE Best airlines', outline: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', favorite: true, deleteAt: Date.now(), cardHover: false, isSelected: false }
     ],
     cards: [],
     showActionToolbar: false,
@@ -89,7 +94,7 @@ export default {
     this.showCards()
   },
   watch: {
-    $route (to, from) {
+    $route () {
       this.showCards()
     }
   },
@@ -105,7 +110,7 @@ export default {
         this.cards = this.source.filter(card => !!card.deleteAt)
       }
     },
-    addToSelectedList (card) {
+    addToSelectedList (card, index) {
       this.showActionToolbar = true
 
       let foundIndex = this.selectedList.findIndex(element => {
@@ -116,12 +121,17 @@ export default {
         this.selectedList = this.selectedList.filter(element => {
           return element !== card.id
         })
+        this.cards[index].isSelected = false
       } else {
         this.selectedList.push(card.id)
+        this.cards[index].isSelected = true
       }
     },
     clearSelected () {
       this.showActionToolbar = false
+      this.cards.forEach(element => {
+        element.isSelected = false
+      })
       this.selectedList = []
     }
   }
