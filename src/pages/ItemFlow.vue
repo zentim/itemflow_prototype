@@ -10,8 +10,8 @@
         <v-btn outline color="info" class="text-none" @click="type='item'">Item</v-btn>
         <v-btn outline color="info" class="text-none" @click="type='flow'">Flow</v-btn>
         <v-btn outline color="info" class="text-none" @click="type='tag'">Tag</v-btn>
-        <v-btn outline color="error" class="text-none">Delete</v-btn>
         <v-btn outline color="info" class="text-none">+Favorite</v-btn>
+        <v-btn outline color="error" class="text-none">Delete</v-btn>
       </div>
     </v-flex>
     <!-- center -->
