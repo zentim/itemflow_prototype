@@ -27,10 +27,15 @@
         @mouseleave="card.cardHover = false"
         xs3
       >
-        <v-badge left overlap :value="card.cardHover || card.isSelected">
+        <v-badge
+          :color="card.isSelected ? 'primary' : '#e8e8e8'"
+          left
+          overlap
+          :value="card.cardHover || card.isSelected"
+        >
           <template v-slot:badge>
             <v-icon
-              dark
+              :dark="card.isSelected"
               small
               @click.prevent="toggleCardSelected(card, index)"
               v-show="card.cardHover || card.isSelected"
