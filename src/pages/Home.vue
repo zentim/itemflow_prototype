@@ -25,14 +25,12 @@
           <v-spacer></v-spacer>
 
           <v-toolbar-items>
-            <v-btn-toggle v-model="toggle_multiple" multiple>
-              <v-btn flat>
-                <v-icon>format_align_right</v-icon>
-              </v-btn>
-              <v-btn flat>
-                <v-icon>sort_by_alpha</v-icon>
-              </v-btn>
-            </v-btn-toggle>
+            <v-btn flat icon @click="toggleGrid">
+              <v-icon :color="cardGrid === 'xs3' ? '#e8e8e8' : '' ">format_align_right</v-icon>
+            </v-btn>
+            <v-btn flat icon @click="sortByTitle">
+              <v-icon :color="tmpCards.length === 0 ? '#e8e8e8' : '' ">sort_by_alpha</v-icon>
+            </v-btn>
           </v-toolbar-items>
         </v-toolbar>
       </v-flex>
@@ -42,8 +40,7 @@
         :key="card.id"
         @mouseover="card.cardHover = true"
         @mouseleave="card.cardHover = false"
-        :xs3="!toggle_multiple.includes(0)"
-        :xs12="toggle_multiple.includes(0)"
+        :class="cardGrid"
       >
         <v-badge
           :color="card.isSelected ? 'primary' : '#e8e8e8'"
@@ -116,7 +113,8 @@ export default {
     showActionToolbar: false,
     selectedList: [],
     toggle_multiple: [],
-    tmpCards: []
+    tmpCards: [],
+    cardGrid: 'xs3'
   }),
   created () {
     this.showCards()
@@ -124,18 +122,6 @@ export default {
   watch: {
     $route () {
       this.showCards()
-    },
-    toggle_multiple (newValue) {
-      if (newValue.includes(1)) {
-        this.tmpCards = this.cards.slice(0, this.cards.length)
-        this.cards = this.cards.sort((a, b) => {
-          if (a.title < b.title) { return -1; }
-          if (a.title > b.title) { return 1; }
-          return 0;
-        })
-      } else {
-        this.cards = this.tmpCards.slice(0, this.cards.length)
-      }
     }
   },
   methods: {
@@ -182,6 +168,22 @@ export default {
         element.isSelected = false
       })
       this.selectedList = []
+    },
+    toggleGrid () {
+      this.cardGrid = this.cardGrid === 'xs3' ? 'xs12' : 'xs3'
+    },
+    sortByTitle () {
+      if (this.tmpCards.length === 0) {
+        this.tmpCards = this.cards.slice(0, this.cards.length)
+        this.cards = this.cards.sort((a, b) => {
+          if (a.title < b.title) { return -1; }
+          if (a.title > b.title) { return 1; }
+          return 0;
+        })
+      } else {
+        this.cards = this.tmpCards.slice(0, this.cards.length)
+        this.tmpCards = []
+      }
     }
   }
 }
