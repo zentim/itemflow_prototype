@@ -18,8 +18,25 @@
         </v-toolbar-items>
       </v-toolbar>
     </v-slide-y-transition>
-    <!-- cards -->
     <v-layout wrap>
+      <!-- sort -->
+      <v-flex xs12>
+        <v-toolbar flat dense color="white">
+          <v-spacer></v-spacer>
+
+          <v-toolbar-items>
+            <v-btn-toggle>
+              <v-btn flat>
+                <v-icon>format_align_right</v-icon>
+              </v-btn>
+              <v-btn flat>
+                <v-icon>sort_by_alpha</v-icon>
+              </v-btn>
+            </v-btn-toggle>
+          </v-toolbar-items>
+        </v-toolbar>
+      </v-flex>
+      <!-- cards -->
       <v-flex
         v-for="(card, index) in cards"
         :key="card.id"
