@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app style="background-color: white">
     <v-toolbar flat dense>
       <v-toolbar-title>
         <router-link
