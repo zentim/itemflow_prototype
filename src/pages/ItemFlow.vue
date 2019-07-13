@@ -151,12 +151,9 @@
 </template>
 
 <script>
-import Editor from '@tinymce/tinymce-vue'
+
 export default {
   name: 'ItemFlow',
-  components: {
-    'tinymce-editor': Editor
-  },
   data: () => ({
     type: 'item',
     title: '',
