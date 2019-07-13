@@ -25,7 +25,7 @@
           <v-spacer></v-spacer>
 
           <v-toolbar-items>
-            <v-btn-toggle>
+            <v-btn-toggle v-model="toggle_multiple" multiple>
               <v-btn flat>
                 <v-icon>format_align_right</v-icon>
               </v-btn>
@@ -42,13 +42,15 @@
         :key="card.id"
         @mouseover="card.cardHover = true"
         @mouseleave="card.cardHover = false"
-        xs3
+        :xs3="!toggle_multiple.includes(0)"
+        :xs12="toggle_multiple.includes(0)"
       >
         <v-badge
           :color="card.isSelected ? 'primary' : '#e8e8e8'"
           left
           overlap
           :value="card.cardHover || card.isSelected"
+          style="width: 100%"
         >
           <template v-slot:badge>
             <v-icon
@@ -59,7 +61,7 @@
             >done</v-icon>
           </template>
           <router-link :to="'/' + card.id" :key="card.id" tag="span" style="cursor: pointer">
-            <v-card width="275px" @click="toggleCardSelected(card, index)">
+            <v-card width="100%" @click="toggleCardSelected(card, index)">
               <v-card-title primary-title>
                 <div style="height: 100px; width: 100%">
                   <div class="headline one-line-overflow-hidden">{{ card.title }}</div>
@@ -97,22 +99,24 @@ export default {
   name: 'Home',
   data: () => ({
     source: [
-      { id: 1, title: 'Pre-fab homes Pre-fab homes Pre-fab homes', outline: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit distinctio, eos, labore inventore molestias recusandae quae velit quod ea est nulla! Et minima quae quo dolor quos perferendis, accusantium voluptatum.', favorite: true, cardHover: false, isSelected: false },
+      { id: 1, title: 'Z Pre-fab homes Pre-fab homes Pre-fab homes', outline: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit distinctio, eos, labore inventore molestias recusandae quae velit quod ea est nulla! Et minima quae quo dolor quos perferendis, accusantium voluptatum.', favorite: true, cardHover: false, isSelected: false },
       { id: 2, title: 'Favorite road trips', outline: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', favorite: false, cardHover: false, isSelected: false },
       { id: 3, title: 'Best airlines', outline: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', favorite: false, cardHover: false, isSelected: false },
       { id: 4, title: 'Pre-fab homes', outline: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', favorite: false, cardHover: false, isSelected: false },
-      { id: 5, title: 'Favorite road trips', outline: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', favorite: false, cardHover: false, isSelected: false },
+      { id: 5, title: 'Gavorite road trips', outline: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', favorite: false, cardHover: false, isSelected: false },
       { id: 6, title: 'DELETE Best airlines', outline: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
-      { id: 7, title: 'DELETE Pre-fab homes', outline: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
-      { id: 8, title: 'DELETE Favorite road trips', outline: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
-      { id: 9, title: 'DELETE Best airlines', outline: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
-      { id: 10, title: 'DELETE Pre-fab homes', outline: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
-      { id: 11, title: 'DELETE Favorite road trips', outline: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
-      { id: 12, title: 'DELETE Best airlines', outline: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', favorite: true, deleteAt: Date.now(), cardHover: false, isSelected: false }
+      { id: 7, title: 'KELETE Pre-fab homes', outline: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
+      { id: 8, title: 'QELETE Favorite road trips', outline: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
+      { id: 9, title: 'WELETE Best airlines', outline: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
+      { id: 10, title: 'JELETE Pre-fab homes', outline: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
+      { id: 11, title: 'AELETE Favorite road trips', outline: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', favorite: false, deleteAt: Date.now(), cardHover: false, isSelected: false },
+      { id: 12, title: 'ZELETE Best airlines', outline: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', favorite: true, deleteAt: Date.now(), cardHover: false, isSelected: false }
     ],
     cards: [],
     showActionToolbar: false,
-    selectedList: []
+    selectedList: [],
+    toggle_multiple: [],
+    tmpCards: []
   }),
   created () {
     this.showCards()
@@ -120,6 +124,18 @@ export default {
   watch: {
     $route () {
       this.showCards()
+    },
+    toggle_multiple (newValue) {
+      if (newValue.includes(1)) {
+        this.tmpCards = this.cards.slice(0, this.cards.length)
+        this.cards = this.cards.sort((a, b) => {
+          if (a.title < b.title) { return -1; }
+          if (a.title > b.title) { return 1; }
+          return 0;
+        })
+      } else {
+        this.cards = this.tmpCards.slice(0, this.cards.length)
+      }
     }
   },
   methods: {
