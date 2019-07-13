@@ -32,36 +32,38 @@
             <v-icon
               dark
               small
-              @click.prevent="addToSelectedList(card, index)"
+              @click.prevent="toggleCardSelected(card, index)"
               v-show="card.cardHover || card.isSelected"
             >done</v-icon>
           </template>
-          <v-card :to="card.title" width="275px">
-            <v-card-title primary-title>
-              <div style="height: 100px; width: 100%">
-                <div class="headline one-line-overflow-hidden">{{ card.title }}</div>
-                <v-divider class="mt-1 mb-3"></v-divider>
-                <div class="multi-line-overflow-hidden">{{ card.outline }}</div>
-              </div>
-            </v-card-title>
+          <router-link :to="'/' + card.id" :key="card.id" tag="span" style="cursor: pointer">
+            <v-card width="275px" @click="toggleCardSelected(card, index)">
+              <v-card-title primary-title>
+                <div style="height: 100px; width: 100%">
+                  <div class="headline one-line-overflow-hidden">{{ card.title }}</div>
+                  <v-divider class="mt-1 mb-3"></v-divider>
+                  <div class="multi-line-overflow-hidden">{{ card.outline }}</div>
+                </div>
+              </v-card-title>
 
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn icon v-show="card.cardHover">
-                <v-icon>bookmark</v-icon>
-              </v-btn>
-              <v-btn icon v-show="card.cardHover">
-                <v-icon>share</v-icon>
-              </v-btn>
-              <v-btn
-                icon
-                @click.prevent="card.favorite = !card.favorite"
-                v-show="card.favorite || card.cardHover"
-              >
-                <v-icon :color="card.favorite ? 'primary' : ''">favorite</v-icon>
-              </v-btn>
-            </v-card-actions>
-          </v-card>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn icon v-show="card.cardHover">
+                  <v-icon>bookmark</v-icon>
+                </v-btn>
+                <v-btn icon v-show="card.cardHover">
+                  <v-icon>share</v-icon>
+                </v-btn>
+                <v-btn
+                  icon
+                  @click.prevent="card.favorite = !card.favorite"
+                  v-show="card.favorite || card.cardHover"
+                >
+                  <v-icon :color="card.favorite ? 'primary' : ''">favorite</v-icon>
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </router-link>
         </v-badge>
       </v-flex>
     </v-layout>
@@ -110,7 +112,12 @@ export default {
         this.cards = this.source.filter(card => !!card.deleteAt)
       }
     },
-    addToSelectedList (card, index) {
+    toggleCardSelected (card, index) {
+      if (this.selectedList.length > 0) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
       this.showActionToolbar = true
 
       let foundIndex = this.selectedList.findIndex(element => {
@@ -125,6 +132,10 @@ export default {
       } else {
         this.selectedList.push(card.id)
         this.cards[index].isSelected = true
+      }
+
+      if (this.selectedList.length === 0) {
+        this.showActionToolbar = false
       }
     },
     clearSelected () {
