@@ -15,8 +15,8 @@
       </div>
     </v-flex>
     <!-- center -->
-    <v-flex xs10>
-      <v-layout row wrap>
+    <v-flex xs11>
+      <v-layout row wrap style="width: 95%">
         <!-- title -->
         <v-flex d-flex xs12>
           <v-text-field label="Title..." solo outline flat hide-details></v-text-field>
@@ -145,18 +145,22 @@
         </v-flex>
       </v-layout>
     </v-flex>
-    <!-- right -->
-    <v-flex d-flex xs1>
-      <v-flex d-flex xs12>
-        <v-btn outline color="info" class="text-none mt-0" @click.stop="drawer = !drawer">
-          <v-icon dark>search</v-icon>
-        </v-btn>
-      </v-flex>
-    </v-flex>
 
     <!-- drawer -->
     <template>
       <!-- search -->
+      <div style="width: 70px; height: 50px; position: fixed; right: 0; z-index: 500">
+        <v-btn
+          outline
+          color="info"
+          class="text-none mx-0"
+          style="min-width: 70px"
+          @click.stop="drawer = !drawer"
+        >
+          <v-icon dark>search</v-icon>
+        </v-btn>
+      </div>
+
       <v-slide-x-reverse-transition>
         <div
           style="width: 340px; height: 50px; position: fixed; right: 0; z-index: 500"
@@ -164,10 +168,9 @@
         >
           <v-btn
             outline
-            small
             color="info"
-            class="text-none mx-0"
-            style="min-width: 20px"
+            class="text-none mx-1 px-1"
+            style="min-width: 40px"
             @click.stop="drawer = !drawer"
           >
             <v-icon dark>keyboard_arrow_right</v-icon>
@@ -186,6 +189,7 @@
           clearable
           prepend-inner-icon="search"
           flat
+          autofocus
         ></v-text-field>
       </div>
 
@@ -194,7 +198,7 @@
           <div style="height: 50px"></div>
           <v-divider></v-divider>
 
-          <draggable v-model="myArray">
+          <draggable v-model="items">
             <transition-group>
               <div v-for="(item, index) in items" :key="item.id">
                 <v-list-tile :key="item.title" avatar ripple @click="toggle(index)">
@@ -492,6 +496,14 @@ export default {
     // drawer
     drawer: false
   }),
+  watch: {
+    drawer (val) {
+      if (!val) return
+      requestAnimationFrame(() => {
+        this.$refs.focus.focus()
+      })
+    }
+  },
   methods: {
     // flow
     toggle (index) {
