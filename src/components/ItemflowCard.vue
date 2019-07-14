@@ -11,12 +11,6 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn icon v-show="card.cardHover">
-          <v-icon>bookmark</v-icon>
-        </v-btn>
-        <v-btn icon v-show="card.cardHover">
-          <v-icon>share</v-icon>
-        </v-btn>
         <v-btn
           icon
           @click.stop="card.favorite = !card.favorite"
