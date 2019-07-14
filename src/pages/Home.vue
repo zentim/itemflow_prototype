@@ -77,7 +77,7 @@
                 </v-btn>
                 <v-btn
                   icon
-                  @click.prevent="card.favorite = !card.favorite"
+                  @click.stop="card.favorite = !card.favorite"
                   v-show="card.favorite || card.cardHover"
                 >
                   <v-icon :color="card.favorite ? 'primary' : ''">favorite</v-icon>
