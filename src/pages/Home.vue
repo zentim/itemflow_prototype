@@ -2,13 +2,19 @@
   <v-container grid-list-xl>
     <!-- action toolbar -->
     <v-slide-y-transition>
-      <v-toolbar flat dense fixed v-show="showActionToolbar">
+      <v-toolbar
+        flat
+        dense
+        fixed
+        v-show="showActionToolbar"
+        style="background-color: white; border-bottom: 1px solid #e8e8e8"
+      >
         <v-toolbar-title>
-          <v-btn outline fab small flat @click.prevent="clearSelected">
-            <v-icon dark>clear</v-icon>
+          <v-btn fab flat @click.prevent="clearSelected">
+            <v-icon>clear</v-icon>
           </v-btn>
         </v-toolbar-title>
-        <h2>{{ selectedList.length }}</h2>
+        <h2>{{ selectedList.length }} Selected</h2>
 
         <v-spacer></v-spacer>
 
