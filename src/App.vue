@@ -1,6 +1,7 @@
 <template>
   <v-app style="background-color: white">
     <v-toolbar flat dense>
+      <!-- logo -->
       <v-toolbar-title>
         <router-link
           to="/"
@@ -12,6 +13,7 @@
 
       <v-spacer></v-spacer>
 
+      <!-- search -->
       <div
         style="width: 600px; border: 1px solid #e8e8e8"
         v-show="$route.name === 'Home' || $route.name === 'Favorite' || $route.name === 'Trash'"
@@ -26,8 +28,9 @@
         ></v-text-field>
       </div>
 
-      <v-spacer></v-spacer>
+      <v-spacer class="hidden-sm-and-down"></v-spacer>
 
+      <!-- nav -->
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn flat to="new">
           <v-icon dark>add</v-icon>New Card
@@ -47,6 +50,7 @@
       </v-toolbar-items>
     </v-toolbar>
 
+    <!-- main -->
     <v-content>
       <router-view></router-view>
     </v-content>
