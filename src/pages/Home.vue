@@ -16,10 +16,41 @@
           <v-btn outline color="info" class="text-none" @click="selectAllCard">Select All</v-btn>
           <v-btn outline color="info" class="text-none" @click="addFavoriteSelectedCard">+Favorite</v-btn>
           <v-btn outline color="info" class="text-none">Export</v-btn>
-          <v-btn outline color="error" class="text-none">Delete</v-btn>
+
+          <!-- delete dialog -->
+          <v-dialog v-model="deleteDialog" persistent max-width="290">
+            <template v-slot:activator="{ on }">
+              <v-btn
+                outline
+                color="error darken-1"
+                v-on="on"
+                class="text-none"
+              >{{ $route.name !== 'Trash' ? 'Delete' : 'Revert'}}</v-btn>
+            </template>
+            <v-card>
+              <v-card-title class="headline">{{ $route.name !== 'Trash' ? 'Delete?' : 'Revert?'}}</v-card-title>
+              <v-card-text>Are you sure?</v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="error darken-1"
+                  flat
+                  @click="deleteSelectedCard"
+                >{{ $route.name !== 'Trash' ? 'Delete' : 'Revert'}} {{ selectedList.length }}</v-btn>
+                <v-btn
+                  color="grey darken-1"
+                  flat
+                  @click="deleteDialog = false"
+                  class="text-none"
+                >Close</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-toolbar-items>
       </v-toolbar>
     </v-slide-y-transition>
+
+    <!-- main -->
     <v-layout wrap>
       <!-- sort -->
       <v-flex xs12>
@@ -108,9 +139,10 @@ export default {
     cards: [],
     showActionToolbar: false,
     selectedList: [],
-    toggle_multiple: [],
     tmpCards: [],
-    cardGrid: 'xs3'
+    cardGrid: 'xs3',
+    // delete dialog
+    deleteDialog: false
   }),
   created () {
     this.showCards()
@@ -196,6 +228,27 @@ export default {
         this.cards = this.tmpCards.slice(0, this.cards.length)
         this.tmpCards = []
       }
+    },
+    deleteSelectedCard () {
+      if (this.$route.name === 'Trash') {
+        this.selectedList.forEach(id => {
+          let foundIndex = this.cards.findIndex(card => {
+            return card.id === id
+          })
+          this.cards[foundIndex].deleteAt = null
+        })
+      } else {
+        this.selectedList.forEach(id => {
+          let foundIndex = this.cards.findIndex(card => {
+            return card.id === id
+          })
+          this.cards[foundIndex].deleteAt = Date.now()
+        })
+      }
+
+      this.clearSelected()
+      this.showCards()
+      this.deleteDialog = false
     }
   }
 }
