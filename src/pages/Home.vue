@@ -13,6 +13,8 @@
         <v-spacer></v-spacer>
 
         <v-toolbar-items>
+          <v-btn outline color="info" class="text-none" @click="selectAllCard">Select All</v-btn>
+          <v-btn outline color="info" class="text-none" @click="addFavoriteSelectedCard">+Favorite</v-btn>
           <v-btn outline color="info" class="text-none">Export</v-btn>
           <v-btn outline color="error" class="text-none">Delete</v-btn>
         </v-toolbar-items>
@@ -57,7 +59,28 @@
               v-show="card.cardHover || card.isSelected"
             >done</v-icon>
           </template>
-          <ItemflowCard :card="card" :index="index"></ItemflowCard>
+          <router-link :to="'/' + card.id" :key="card.id" tag="span" style="cursor: pointer">
+            <v-card width="100%" @click="toggleCardSelected(card, index)">
+              <v-card-title primary-title>
+                <div style="height: 100px; width: 100%">
+                  <div class="headline one-line-overflow-hidden">{{ card.title }}</div>
+                  <v-divider class="mt-1 mb-3"></v-divider>
+                  <div class="multi-line-overflow-hidden">{{ card.outline }}</div>
+                </div>
+              </v-card-title>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  icon
+                  @click.stop="card.favorite = !card.favorite"
+                  v-show="card.favorite || card.cardHover"
+                >
+                  <v-icon :color="card.favorite ? 'primary' : ''">favorite</v-icon>
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </router-link>
         </v-badge>
       </v-flex>
     </v-layout>
@@ -65,12 +88,8 @@
 </template>
 
 <script>
-import ItemflowCard from '../components/ItemflowCard'
 export default {
   name: 'Home',
-  components: {
-    'ItemflowCard': ItemflowCard
-  },
   data: () => ({
     source: [
       { id: '1', title: 'Z Pre-fab homes Pre-fab homes Pre-fab homes', outline: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit distinctio, eos, labore inventore molestias recusandae quae velit quod ea est nulla! Et minima quae quo dolor quos perferendis, accusantium voluptatum.', favorite: true, cardHover: false, isSelected: false },
@@ -138,6 +157,21 @@ export default {
       if (this.selectedList.length === 0) {
         this.showActionToolbar = false
       }
+    },
+    selectAllCard () {
+      this.selectedList = []
+      this.cards.forEach(card => {
+        this.selectedList.push(card.id)
+        card.isSelected = true
+      })
+    },
+    addFavoriteSelectedCard () {
+      this.selectedList.forEach(id => {
+        let foundIndex = this.cards.findIndex(card => {
+          return card.id === id
+        })
+        this.cards[foundIndex].favorite = true
+      })
     },
     clearSelected () {
       this.showActionToolbar = false

@@ -540,4 +540,21 @@ export default {
   right: 50px;
   z-index: 100;
 }
+
+/* card */
+.one-line-overflow-hidden {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.multi-line-overflow-hidden {
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.v-card__actions {
+  height: 52px;
+}
 </style>
