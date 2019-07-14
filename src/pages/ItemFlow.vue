@@ -7,9 +7,24 @@
         <v-btn outline color="info" class="text-none mt-0">
           <v-icon dark>view_headline</v-icon>
         </v-btn>
-        <v-btn outline color="info" class="text-none" @click="type='item'">Item</v-btn>
-        <v-btn outline color="info" class="text-none" @click="type='flow'">Flow</v-btn>
-        <v-btn outline color="info" class="text-none" @click="type='tag'">Tag</v-btn>
+        <v-btn
+          :outline="type === 'item' ? false : true"
+          color="info"
+          class="text-none"
+          @click="type='item'"
+        >Item</v-btn>
+        <v-btn
+          :outline="type === 'flow' ? false : true"
+          color="info"
+          class="text-none"
+          @click="type='flow'"
+        >Flow</v-btn>
+        <v-btn
+          :outline="type === 'tag' ? false : true"
+          color="info"
+          class="text-none"
+          @click="type='tag'"
+        >Tag</v-btn>
         <v-btn outline color="info" class="text-none">+Favorite</v-btn>
         <v-btn outline color="error" class="text-none">Delete</v-btn>
       </div>
