@@ -172,6 +172,7 @@ export default {
         })
         this.cards[foundIndex].favorite = true
       })
+      this.clearSelected()
     },
     clearSelected () {
       this.showActionToolbar = false
