@@ -156,23 +156,38 @@
 
     <!-- drawer -->
     <template>
-      <v-navigation-drawer v-model="drawer" absolute temporary right hide-overlay>
-        <v-list class="pa-1">
-          <v-btn outline color="info" class="text-none mt-0" @click.stop="drawer = !drawer">hide</v-btn>
-          <!-- search -->
-          <div style="height: 50px; border: 1px solid #e8e8e8">
-            <v-text-field
-              v-model="searchInput"
-              solo
-              label="Search..."
-              clearable
-              prepend-inner-icon="search"
-              flat
-            ></v-text-field>
-          </div>
-        </v-list>
-
+      <!-- search -->
+      <div
+        style="width: 340px; height: 50px; position: fixed; right: 0; z-index: 500"
+        v-show="drawer"
+      >
+        <v-btn
+          outline
+          small
+          color="info"
+          class="text-none mx-0"
+          style="min-width: 20px"
+          @click.stop="drawer = !drawer"
+        >
+          <v-icon dark>keyboard_arrow_right</v-icon>
+        </v-btn>
+      </div>
+      <div
+        style="width: 300px; height: 50px; border: 1px solid #e8e8e8; position: fixed; right: 0; z-index: 500"
+        v-show="drawer"
+      >
+        <v-text-field
+          v-model="searchInput"
+          solo
+          label="Search..."
+          clearable
+          prepend-inner-icon="search"
+          flat
+        ></v-text-field>
+      </div>
+      <v-navigation-drawer v-model="drawer" absolute right hide-overlay>
         <v-list class="pt-0" dense>
+          <div style="height: 50px"></div>
           <v-divider></v-divider>
 
           <draggable v-model="myArray">
@@ -223,7 +238,7 @@ export default {
         id: '9',
         action: '15 min',
         headline: 'Brunch this weekend?',
-        title: 'Ali Connors',
+        title: '1st',
         subtitle: "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
       },
       {
@@ -500,5 +515,13 @@ export default {
 <style>
 .tox .tox-notification--in {
   display: none !important;
+}
+.buttonsContainer {
+  display: block;
+  border: 1px solid orange;
+  position: fixed;
+  bottom: 70px;
+  right: 50px;
+  z-index: 100;
 }
 </style>
