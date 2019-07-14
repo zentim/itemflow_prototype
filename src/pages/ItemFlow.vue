@@ -157,21 +157,24 @@
     <!-- drawer -->
     <template>
       <!-- search -->
-      <div
-        style="width: 340px; height: 50px; position: fixed; right: 0; z-index: 500"
-        v-show="drawer"
-      >
-        <v-btn
-          outline
-          small
-          color="info"
-          class="text-none mx-0"
-          style="min-width: 20px"
-          @click.stop="drawer = !drawer"
+      <v-slide-x-reverse-transition>
+        <div
+          style="width: 340px; height: 50px; position: fixed; right: 0; z-index: 500"
+          v-show="drawer"
         >
-          <v-icon dark>keyboard_arrow_right</v-icon>
-        </v-btn>
-      </div>
+          <v-btn
+            outline
+            small
+            color="info"
+            class="text-none mx-0"
+            style="min-width: 20px"
+            @click.stop="drawer = !drawer"
+          >
+            <v-icon dark>keyboard_arrow_right</v-icon>
+          </v-btn>
+        </div>
+      </v-slide-x-reverse-transition>
+
       <div
         style="width: 300px; height: 50px; border: 1px solid #e8e8e8; position: fixed; right: 0; z-index: 500"
         v-show="drawer"
@@ -185,6 +188,7 @@
           flat
         ></v-text-field>
       </div>
+
       <v-navigation-drawer v-model="drawer" absolute right hide-overlay>
         <v-list class="pt-0" dense>
           <div style="height: 50px"></div>
@@ -486,7 +490,7 @@ export default {
     chips_to: ['Programming', 'Playing video games', 'Watching movies', 'Sleeping'],
     chipsItems_to: ['Streaming', 'Eating'],
     // drawer
-    drawer: null
+    drawer: false
   }),
   methods: {
     // flow
