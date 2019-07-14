@@ -1,31 +1,56 @@
 <template>
-  <v-container grid-list-xl>
-    <v-layout text-xs-center wrap>
-      <v-flex v-for="card in cards" :key="card.title" xs3>
-        <v-card>
-          <v-img :src="card.src" height="200px">
-            <v-container fill-height fluid pa-2>
-              <v-layout fill-height>
-                <v-flex xs12 align-end flexbox>
-                  <span class="headline white--text" v-text="card.title"></span>
+  <v-container fluid>
+    <v-layout row wrap align-center>
+      <v-flex xs12 sm5 offset-sm1>
+        <div>
+          <div>
+            <v-card color="primary" class="white--text">
+              <v-layout row wrap>
+                <v-flex xs12 sm12 md5>
+                  <v-img
+                    src="https://cdn.vuetifyjs.com/images/cards/foster.jpg"
+                    height="300px"
+                    contain
+                    class="mx-3"
+                  ></v-img>
+                </v-flex>
+                <v-flex xs12 sm12 md7>
+                  <v-card-title primary-title>
+                    <div>
+                      <div class="headline">User Name</div>
+                      <div class="mt-2 mx-5">
+                        OOXXOOXX
+                        <v-divider light></v-divider>
+                      </div>
+                    </div>
+                  </v-card-title>
+                  <v-card-title primary-title>
+                    <div>
+                      <div class="headline">E-mail</div>
+                      <div class="mt-2 mx-5">
+                        OOXXOOXX@gmail.com
+                        <v-divider light></v-divider>
+                      </div>
+                    </div>
+                  </v-card-title>
                 </v-flex>
               </v-layout>
-            </v-container>
-          </v-img>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn icon>
-              <v-icon>favorite</v-icon>
-            </v-btn>
-            <v-btn icon>
-              <v-icon>bookmark</v-icon>
-            </v-btn>
-            <v-btn icon>
-              <v-icon>share</v-icon>
-            </v-btn>
-          </v-card-actions>
-        </v-card>
+            </v-card>
+          </div>
+          <div class="mt-5">
+            <v-btn block outline large color="primary" dark>Import</v-btn>
+          </div>
+          <div class="mt-3">
+            <v-btn block outline large color="primary" dark>Export</v-btn>
+          </div>
+        </div>
+      </v-flex>
+      <v-flex xs12 sm6>
+        <div style="width: 80%; margin: 0 auto">
+          <div class="display-1">You've got:</div>
+          <div class="headline mt-2 mx-5 px-5">XXXXXX Items</div>
+          <div class="headline mt-2 mx-5 px-5">XXXXXX Flows</div>
+        </div>
       </v-flex>
     </v-layout>
   </v-container>
@@ -33,15 +58,9 @@
 
 <script>
 export default {
-  name: 'CreateItemFlow',
+  name: 'Account',
   data: () => ({
-    cards: [
-      { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12 },
-      { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12 }
-    ]
+
   })
 }
 </script>
-
-<style>
-</style>
