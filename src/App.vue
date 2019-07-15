@@ -30,6 +30,8 @@
           clearable
           prepend-inner-icon="search"
           flat
+          @focus="isSearching = true"
+          @blur="isSearching = false"
         ></v-text-field>
       </div>
 
@@ -54,7 +56,7 @@
         </v-btn>
       </v-toolbar-items>
 
-      <v-toolbar-items class="hidden-md-and-up">
+      <v-toolbar-items class="hidden-md-and-up" v-show="!isSearching">
         <v-btn icon flat to="new">
           <v-icon dark>add</v-icon>
         </v-btn>
@@ -85,6 +87,7 @@ export default {
   name: 'App',
   data () {
     return {
+      isSearching: false,
       searchInput: ''
     }
   }
