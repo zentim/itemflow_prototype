@@ -1,15 +1,10 @@
 <template>
   <v-layout row wrap>
     <!-- left -->
-    <v-flex d-flex xs1>
+    <v-flex d-flex xs12 md1>
       <!-- sidebar -->
-      <div style="text-align:center">
-        <v-btn
-          outline
-          color="info"
-          class="text-none mt-0"
-          @click="functionButton = !functionButton"
-        >
+      <div style="text-align:left">
+        <v-btn outline color="info" class="text-none" @click="functionButton = !functionButton">
           <v-icon dark>view_headline</v-icon>
         </v-btn>
         <v-btn
@@ -38,8 +33,8 @@
       </div>
     </v-flex>
     <!-- center -->
-    <v-flex xs11>
-      <v-layout row wrap style="width: 95%">
+    <v-flex xs12 md11>
+      <v-layout row wrap :style="{width: centerWidth}">
         <!-- title -->
         <v-flex d-flex xs12>
           <v-text-field label="Title..." solo outline flat hide-details></v-text-field>
@@ -48,7 +43,7 @@
           <!-- type: item -->
           <v-layout row wrap v-show="type === 'item'">
             <!-- outline -->
-            <v-flex d-flex xs2>
+            <v-flex d-flex xs12 md2 class="hidden-sm-and-down">
               <v-textarea
                 v-model="outline"
                 auto-grow
@@ -58,8 +53,18 @@
                 rows="25"
               ></v-textarea>
             </v-flex>
+            <v-flex d-flex xs12 md2 class="hidden-md-and-up">
+              <v-textarea
+                v-model="outline"
+                auto-grow
+                outline
+                label="Outline..."
+                hide-details
+                rows="5"
+              ></v-textarea>
+            </v-flex>
             <!-- content -->
-            <v-flex d-flex xs10>
+            <v-flex d-flex xs12 md10 style="min-height: 600px">
               <tinymce-editor :init="{plugins: 'wordcount', height: '100%'}"></tinymce-editor>
             </v-flex>
           </v-layout>
@@ -185,14 +190,15 @@
       </div>
 
       <div
-        style="width: 304px; height: 50px; position: fixed; right: 0; z-index: 500"
+        style="width: 300px; height: 50px; border: 1px solid #e8e8e8; position: fixed; right: 0; z-index: 500; background-color: white"
         v-show="drawer"
       >
         <v-btn
           flat
           color="info"
-          class="text-none mx-1 px-1"
-          style="min-width: 40px"
+          class="text-none mx-0 my-0 px-0"
+          style="min-width: 40px; height: 100%"
+          large
           @click.stop="drawer = !drawer"
         >
           <v-icon dark>keyboard_arrow_right</v-icon>
@@ -200,7 +206,7 @@
       </div>
 
       <div
-        style="width: 260px; height: 50px; border: 1px solid #e8e8e8; position: fixed; right: 0; z-index: 500"
+        style="width: 260px; height: 50px; border: 1px solid #e8e8e8; position: fixed; right: 0; z-index: 500;"
         v-show="drawer"
       >
         <v-text-field
@@ -519,6 +525,18 @@ export default {
     // drawer
     drawer: false,
   }),
+  computed: {
+    centerWidth () {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return '100%'
+        case 'sm': return '100%'
+        case 'md': return '95%'
+        case 'lg': return '95%'
+        case 'xl': return '95%'
+      }
+      return '95%'
+    }
+  },
   watch: {
     drawer (val) {
       if (!val) return
