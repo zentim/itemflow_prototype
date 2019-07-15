@@ -4,7 +4,12 @@
     <v-flex d-flex xs1>
       <!-- sidebar -->
       <div style="text-align:center">
-        <v-btn outline color="info" class="text-none mt-0">
+        <v-btn
+          outline
+          color="info"
+          class="text-none mt-0"
+          @click="functionButton = !functionButton"
+        >
           <v-icon dark>view_headline</v-icon>
         </v-btn>
         <v-btn
@@ -12,21 +17,24 @@
           color="info"
           class="text-none"
           @click="type='item'"
+          v-show="functionButton"
         >Item</v-btn>
         <v-btn
           :outline="type === 'flow' ? false : true"
           color="info"
           class="text-none"
           @click="type='flow'"
+          v-show="functionButton"
         >Flow</v-btn>
         <v-btn
           :outline="type === 'tag' ? false : true"
           color="info"
           class="text-none"
           @click="type='tag'"
+          v-show="functionButton"
         >Tag</v-btn>
-        <v-btn outline color="info" class="text-none">+Favorite</v-btn>
-        <v-btn outline color="error" class="text-none">Delete</v-btn>
+        <v-btn outline color="info" class="text-none" v-show="functionButton">+Favorite</v-btn>
+        <v-btn outline color="error" class="text-none" v-show="functionButton">Delete</v-btn>
       </div>
     </v-flex>
     <!-- center -->
@@ -506,8 +514,10 @@ export default {
     chipsItems_from: ['Streaming', 'Eating'],
     chips_to: ['Programming', 'Playing video games', 'Watching movies', 'Sleeping'],
     chipsItems_to: ['Streaming', 'Eating'],
+    // function button
+    functionButton: false,
     // drawer
-    drawer: false
+    drawer: false,
   }),
   watch: {
     drawer (val) {
