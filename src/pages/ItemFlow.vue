@@ -176,25 +176,23 @@
         </v-btn>
       </div>
 
-      <v-slide-x-reverse-transition>
-        <div
-          style="width: 340px; height: 50px; position: fixed; right: 0; z-index: 500"
-          v-show="drawer"
+      <div
+        style="width: 304px; height: 50px; position: fixed; right: 0; z-index: 500"
+        v-show="drawer"
+      >
+        <v-btn
+          flat
+          color="info"
+          class="text-none mx-1 px-1"
+          style="min-width: 40px"
+          @click.stop="drawer = !drawer"
         >
-          <v-btn
-            outline
-            color="info"
-            class="text-none mx-1 px-1"
-            style="min-width: 40px"
-            @click.stop="drawer = !drawer"
-          >
-            <v-icon dark>keyboard_arrow_right</v-icon>
-          </v-btn>
-        </div>
-      </v-slide-x-reverse-transition>
+          <v-icon dark>keyboard_arrow_right</v-icon>
+        </v-btn>
+      </div>
 
       <div
-        style="width: 300px; height: 50px; border: 1px solid #e8e8e8; position: fixed; right: 0; z-index: 500"
+        style="width: 260px; height: 50px; border: 1px solid #e8e8e8; position: fixed; right: 0; z-index: 500"
         v-show="drawer"
       >
         <v-text-field
