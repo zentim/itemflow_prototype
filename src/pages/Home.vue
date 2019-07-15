@@ -65,7 +65,7 @@
 
           <v-toolbar-items>
             <v-btn flat icon @click="toggleGrid">
-              <v-icon :color="cardGrid === 'xs3' ? '#e8e8e8' : '' ">format_align_right</v-icon>
+              <v-icon :color="cardGrid === 'xs6 sm3' ? '#e8e8e8' : '' ">format_align_right</v-icon>
             </v-btn>
             <v-btn flat icon @click="sortByTitle">
               <v-icon :color="tmpCards.length === 0 ? '#e8e8e8' : '' ">sort_by_alpha</v-icon>
@@ -97,7 +97,12 @@
             >done</v-icon>
           </template>
           <router-link :to="'/' + card.id" :key="card.id" tag="span" style="cursor: pointer">
-            <v-card width="100%" @click="toggleCardSelected(card, index)">
+            <v-card
+              width="100%"
+              @click="toggleCardSelected(card, index)"
+              :flat="!card.cardHover"
+              style="border: 1px solid #e8e8e8; border-radius: 8px"
+            >
               <v-card-title primary-title>
                 <div style="height: 100px; width: 100%">
                   <div class="headline one-line-overflow-hidden">{{ card.title }}</div>
@@ -153,7 +158,7 @@ export default {
     showActionToolbar: false,
     selectedList: [],
     tmpCards: [],
-    cardGrid: 'xs3',
+    cardGrid: 'xs6 sm3',
     // delete dialog
     deleteDialog: false
   }),
@@ -227,7 +232,7 @@ export default {
       this.selectedList = []
     },
     toggleGrid () {
-      this.cardGrid = this.cardGrid === 'xs3' ? 'xs12' : 'xs3'
+      this.cardGrid = this.cardGrid === 'xs6 sm3' ? 'xs12' : 'xs6 sm3'
     },
     sortByTitle () {
       if (this.tmpCards.length === 0) {
