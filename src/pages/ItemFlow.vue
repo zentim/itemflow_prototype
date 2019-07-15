@@ -210,7 +210,7 @@
         ></v-text-field>
       </div>
 
-      <v-navigation-drawer v-model="drawer" absolute right hide-overlay v-show="drawer">
+      <v-navigation-drawer v-model="drawer" absolute right hide-overlay v-show="drawer" stateless>
         <v-list class="pt-0" dense>
           <div style="height: 50px"></div>
           <v-divider></v-divider>
@@ -535,14 +535,6 @@ export default {
         case 'xl': return '600px'
       }
       return '600px'
-    }
-  },
-  watch: {
-    drawer (val) {
-      if (!val) return
-      requestAnimationFrame(() => {
-        this.$refs.focus.focus()
-      })
     }
   },
   methods: {
