@@ -210,7 +210,7 @@
         ></v-text-field>
       </div>
 
-      <v-navigation-drawer v-model="drawer" absolute right hide-overlay>
+      <v-navigation-drawer v-model="drawer" absolute right hide-overlay v-show="drawer">
         <v-list class="pt-0" dense>
           <div style="height: 50px"></div>
           <v-divider></v-divider>
