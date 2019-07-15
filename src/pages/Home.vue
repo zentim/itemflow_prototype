@@ -14,7 +14,8 @@
             <v-icon>clear</v-icon>
           </v-btn>
         </v-toolbar-title>
-        <h2>{{ selectedList.length }} Selected</h2>
+        <h2 class="hidden-sm-and-down">{{ selectedList.length }} Selected</h2>
+        <h2 class="hidden-md-and-up">{{ selectedList.length }}</h2>
 
         <v-spacer></v-spacer>
 

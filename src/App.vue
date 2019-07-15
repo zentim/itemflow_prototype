@@ -11,7 +11,7 @@
         >ItemFlow</router-link>
       </v-toolbar-title>
       <v-toolbar-items class="hidden-md-and-up">
-        <v-btn icon flat to="/" class="hidden-md-and-up">
+        <v-btn icon flat to="/">
           <v-icon dark>home</v-icon>
         </v-btn>
       </v-toolbar-items>
