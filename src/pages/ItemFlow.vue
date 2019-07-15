@@ -43,24 +43,14 @@
           <!-- type: item -->
           <v-layout row wrap v-show="type === 'item'">
             <!-- outline -->
-            <v-flex d-flex xs12 md2 class="hidden-sm-and-down">
+            <v-flex d-flex xs12 md2>
               <v-textarea
                 v-model="outline"
                 auto-grow
                 outline
                 label="Outline..."
                 hide-details
-                rows="25"
-              ></v-textarea>
-            </v-flex>
-            <v-flex d-flex xs12 md2 class="hidden-md-and-up">
-              <v-textarea
-                v-model="outline"
-                auto-grow
-                outline
-                label="Outline..."
-                hide-details
-                rows="5"
+                :height="outlineWidth"
               ></v-textarea>
             </v-flex>
             <!-- content -->
@@ -535,6 +525,16 @@ export default {
         case 'xl': return '95%'
       }
       return '95%'
+    },
+    outlineWidth () {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return '300px'
+        case 'sm': return '300px'
+        case 'md': return '600px'
+        case 'lg': return '600px'
+        case 'xl': return '600px'
+      }
+      return '600px'
     }
   },
   watch: {
