@@ -2,7 +2,7 @@
   <v-app style="background-color: white">
     <v-toolbar flat dense style="background-color: white; border-bottom: 1px solid #e8e8e8">
       <!-- logo -->
-      <v-toolbar-title>
+      <v-toolbar-title class="hidden-sm-and-down">
         <router-link
           to="/"
           tag="span"
@@ -10,6 +10,11 @@
           class="display-1 font-weight-bold text-none"
         >ItemFlow</router-link>
       </v-toolbar-title>
+      <v-toolbar-items class="hidden-md-and-up">
+        <v-btn icon flat to="/" class="hidden-md-and-up">
+          <v-icon dark>home</v-icon>
+        </v-btn>
+      </v-toolbar-items>
 
       <v-spacer></v-spacer>
 
@@ -46,6 +51,24 @@
         </v-btn>
         <v-btn flat to="account">
           <v-icon dark>account_box</v-icon>Account
+        </v-btn>
+      </v-toolbar-items>
+
+      <v-toolbar-items class="hidden-md-and-up">
+        <v-btn icon flat to="new">
+          <v-icon dark>add</v-icon>
+        </v-btn>
+        <v-btn icon flat to="/">
+          <v-icon dark>view_carousel</v-icon>
+        </v-btn>
+        <v-btn icon flat to="favorite">
+          <v-icon dark>favorite</v-icon>
+        </v-btn>
+        <v-btn icon flat to="trash">
+          <v-icon dark>delete</v-icon>
+        </v-btn>
+        <v-btn icon flat to="account">
+          <v-icon dark>account_box</v-icon>
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
