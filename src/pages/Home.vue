@@ -41,7 +41,7 @@
                 <v-btn
                   color="error darken-1"
                   flat
-                  @click="deleteSelectedCard"
+                  @click="deleteSelectedCard(null)"
                 >{{ $route.name !== 'Trash' ? 'Delete' : 'Revert'}} {{ selectedList.length }}</v-btn>
                 <v-btn
                   color="grey darken-1"
@@ -108,6 +108,13 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
+                <v-btn
+                  icon
+                  @click.stop="deleteSelectedCard(card)"
+                  v-show="card.cardHover && !showActionToolbar"
+                >
+                  <v-icon>{{ $route.name !== 'Trash' ? 'delete' : 'restore_from_trash' }}</v-icon>
+                </v-btn>
                 <v-btn
                   icon
                   @click.stop="card.favorite = !card.favorite"
@@ -235,7 +242,11 @@ export default {
         this.tmpCards = []
       }
     },
-    deleteSelectedCard () {
+    deleteSelectedCard (card = null) {
+      if (card) {
+        this.selectedList.push(card.id)
+      }
+
       if (this.$route.name === 'Trash') {
         this.selectedList.forEach(id => {
           let foundIndex = this.cards.findIndex(card => {
