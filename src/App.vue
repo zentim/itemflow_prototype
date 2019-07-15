@@ -1,6 +1,6 @@
 <template>
   <v-app style="background-color: white">
-    <v-toolbar flat dense style="background-color: white; border-bottom: 1px solid #e8e8e8">
+    <v-toolbar fixed flat dense style="background-color: white; border-bottom: 1px solid #e8e8e8">
       <!-- logo -->
       <v-toolbar-title class="hidden-sm-and-down">
         <router-link
@@ -74,7 +74,7 @@
     </v-toolbar>
 
     <!-- main -->
-    <v-content>
+    <v-content class="mt-5">
       <router-view></router-view>
     </v-content>
   </v-app>
@@ -93,5 +93,11 @@ export default {
 <style>
 .v-input__slot {
   margin-bottom: 0;
+}
+@media only screen and (max-width: 600px) {
+  .v-toolbar__content,
+  .v-toolbar__extension {
+    padding: 0px;
+  }
 }
 </style>
