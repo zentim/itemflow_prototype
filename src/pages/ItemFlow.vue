@@ -42,15 +42,15 @@
         <v-flex d-flex xs12>
           <!-- type: item -->
           <v-layout row wrap v-show="type === 'item'">
-            <!-- outline -->
+            <!-- description -->
             <v-flex d-flex xs12 md2>
               <v-textarea
-                v-model="outline"
+                v-model="description"
                 auto-grow
                 outline
-                label="Outline..."
+                label="Description..."
                 hide-details
-                :height="outlineWidth"
+                :height="descriptionWidth"
               ></v-textarea>
             </v-flex>
             <!-- content -->
@@ -254,7 +254,7 @@ export default {
     type: 'item',
     title: '',
     // item
-    outline: '',
+    description: '',
     content: '',
     // flow
     selected: [2],
@@ -526,7 +526,7 @@ export default {
       }
       return '95%'
     },
-    outlineWidth () {
+    descriptionWidth () {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs': return '300px'
         case 'sm': return '300px'
