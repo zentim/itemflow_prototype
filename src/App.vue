@@ -1,6 +1,11 @@
 <template>
   <v-app style="background-color: white">
-    <v-toolbar fixed flat dense style="background-color: white; border-bottom: 1px solid #e8e8e8">
+    <v-toolbar
+      fixed
+      flat
+      dense
+      style="background-color: white; border-bottom: 1px solid #e8e8e8; z-index: 500"
+    >
       <!-- logo -->
       <v-toolbar-title class="hidden-sm-and-down">
         <router-link
